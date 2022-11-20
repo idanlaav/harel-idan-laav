@@ -8,7 +8,7 @@ html {
 }
 
 .height {
-    min-height: 73vh;
+    min-height: 67vh;
 }
 
 th,
@@ -556,7 +556,7 @@ tr {
 .moveBtn {
     position: fixed;
     left: 20px;
-    top: 135px;
+    top: 145px;
     color: burlywood;
     font-size: 20px;
     font-weight: bolder;
