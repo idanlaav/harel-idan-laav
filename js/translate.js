@@ -1,0 +1,10 @@
+const NO_GUESTS = "<tr> לא נוספו אורחים לזימון</tr>";
+const TIME_ERROR_MESSAGE = "זמן הסיום חייב להיות לאחר זמן ההתחלה";
+const BUILDING_NAME_DEFAULT_VALUE = "בחר את הבניין בו תתבצע הפגישה";
+const BUILDING_FLOORS_DEFAULT_VALUE = "בחר את הקומה בבניין בו תתבצע הפגישה";
+const HOSTNAME_DEFAULT_VALUE = "בחר את שם המארח של הפגישה";
+const SUCCESS_INVITE_MEETING = "הפגישה הוזמנה בהצלחה.";
+const GUEST_DELETION_CONFIRMATION = "האם אתה בטוח שברצונך למחוק את אורח זה מהרשימה?";
+const ARRAY_BUILDING_NAMES = ["בניין הראל - רמת גן", "בניין הראל - פתח תקווה", "בניין הראל - אשדוד"];
+const ARRAY_MEETING_HOSTNAMES = ["עידן להב","מיכאל שוורץ","ניר כהן","שי גלילה","אדם פולצ׳ק","שירלי דרחי","אליאור זוארץ"];
+const NO_MEETINGS = "<tr>לא נוספו פגישות</tr>"

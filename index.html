@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- START ACCESSABILITY SECTION -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript"></script>
+    <script src="https://www.negishim.com/accessibility/accessibility_pro_group255.js" type="text/javascript"></script>
+    <script type="text/javascript" tabindex="-1">
+        accessibility_rtl = false;
+        pixel_from_side = 15;
+        pixel_from_start = 170;
+    </script>
+    <!-- END ACCESSABILITY SECTION -->
+
+    <!-- START - Page Scripts-->
+    <script defer src="./js/translate.js"></script>
+    <script defer src="./js/main.js"></script>
+    <script defer src="./js/guestService.js"></script>
+    <script defer src="./js/meetingService.js"></script>
+    <!-- END - Page Scripts-->
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="style.css">
+    <title>הראל חברה לביטוח</title>
+</head>
+
+<header>
+    <!-- Subject page -->
+    <h1><span class="blueSubject">מערכת זימון</span>&nbsp;<span class="greenSubject">פגישות - הראל</span>&nbsp;חברה
+        לביטוח</h1>
+    <img src="./assets/headerLogo.jpeg">
+</header>
+
+<body>
+    <hr>
+    <!-- START - Main form -->
+    <form id="mainForm" onsubmit="addNewMeeting(); return false">
+        <h3>פרטי פגישה</h3>
+        <label>מטרת הפגישה: <b>*</b></label>
+        <input id="purposeOfTheMeeting" type="text" minlength="5" maxlength="250" placeholder="אנא אכנס טקסט לבחירתך..."
+            required><br />
+
+        <label>בניין הפגישה: <b>*</b></label>
+        <select id="meetingBuildings" required></select><br />
+
+        <label>קומת הפגישה: <b>*</b></label>
+        <select id="meetingFloors" required></select><br />
+
+        <div class="box">
+
+            <label>תאריך הפגישה: <b>*</b></label>
+            <input id="meetingDate" type="date" required>
+
+            <label>שעת תחילת הפגישה: <b>*</b></label>
+            <input id="beginningTime" class="smallWidth" type="time" onchange="checkingTimeSelection()" required>
+
+            <label>שעת סיום הפגישה: <b>*</b></label>
+            <input id="endTime" class="smallWidth" type="time" onblur="checkingTimeSelection()" required>
+
+        </div>
+
+        <label>שם מארח הפגישה: <b>*</b></label>
+        <select id="hostnames" required></select><br />
+
+        <!-- End - Main form -->
+
+
+        <!-- START - Guest area -->
+        <h3>הוספת אורחים</h3>
+        <p>לחץ ״חדש״ להזמנת אורחים חדשים:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th><button type="button" class="open-button" onclick="openForm()">חדש</button></th>
+                    <th>תעודת זהות</th>
+                    <th>שם משפחה</th>
+                    <th>שם פרטי</th>
+                    <th>טלפון נייד</th>
+                    <th>בטל/ערוך זימון</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+            <tfoot id="tfoot"></tfoot>
+        </table><br />
+        <!-- End - Guest area -->
+
+        <button id="addMeetingBtn" class="animated-button" disabled>
+            <!-- This causes effects that move on the button -->
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <!-- End Of the effects -->
+            הזמן פגישה
+        </button><br /><br />
+
+        <b>
+            <li>נא ליידע את האורח שעליו להגיע/להצטייד בתעודה מזהה</li>
+        </b>
+    </form>
+
+
+    <!-- START - Popup form: -->
+    <div class="form-popup" id="popupForm">
+        <form id="guestForm" onsubmit="addNewGuestToList(); return false">
+            <h2>ערוך פרטי אורח:</h2>
+
+            <label>תעודת זהות: <b>*</b></label>
+            <input id="idNumber" type="text" pattern="\b\d{9}\b" title="ניתן למלא רק ספרות באורך של 9 תווים."
+                placeholder="אנא מלא תעודת זהות בעלת 9 ספרות..." max="0" maxlength="9"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '');" required><br />
+
+            <label>שם פרטי: <b>*</b></label>
+            <input id="firstName" type="text" placeholder="אנא מלא שם פרטי..." maxlength="15"
+                oninput="this.value = this.value.replace(/[^א-ת׳a-zA-Z.]/g, '');" required><br />
+
+            <label>שם משפחה: <b>*</b></label>
+            <input id="lastName" type="text" placeholder="אנא מלא שם המשפחה..." maxlength="15"
+                oninput="this.value = this.value.replace(/[^א-ת׳a-zA-Z.]/g, '');" required><br />
+
+            <label>טלפון: <b>*</b></label>
+            <input id="phoneNumber" type="text"
+                pattern="(?:(?:(\+?972|\(\+?972\)|\+?\(972\))(?:\s|\.|-)?([1-9]\d?))|(0[23489]{1})|(0[57]{1}[0-9]))(?:\s|\.|-)?([^0\D]{1}\d{2}(?:\s|\.|-)?\d{4})"
+                placeholder="אנא מלא מספר טלפון נייד..." title="הכנס מס׳ טלפון חוקי" maxlength="15" required><br />
+
+            <label>הערות:</label><br />
+            <textarea id="comment" type="text" placeholder="אנא אכנס טקסט לבחירתך... (לא חובה)"
+                maxlength="250"></textarea><br /><br />
+
+            <button class="guest greenBtn guestBtn">עדכן</button>
+            <button type="reset" class="guest cancel redBtn guestBtn" onclick="closeForm()">ביטול</button>
+        </form>
+    </div>
+    <!-- End - Popup form: -->
+
+    <!-- START Move to show meeting page -->
+    <button class="moveBtn" onclick="location.href='meetings.html'">כל הפגישות</button>
+    <!-- End - Move to show meeting page -->
+
+</body>
+<hr>
+
+<footer>Copyright © 2022 Idan Laav. All rights reserved</footer>
+
+</html>
